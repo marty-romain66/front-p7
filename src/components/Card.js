@@ -79,7 +79,7 @@ if(auth.isAdmin === true || auth.admin === true){
     });
 
   return (
-    <div className="card postion-relative">
+    <div className="cards postion-relative">
       {auth.userId === post.userId || auth.isAdmin === true ? (
         <div className="card__action">
           <CloseIcon onClick={deleteCard} className="close" />

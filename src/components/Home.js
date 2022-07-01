@@ -18,7 +18,7 @@ return (
     <div>
         {auth !== false?
         
-        <><Header /><AddPost /><div className="container">
+        <><Header /><AddPost /><div className="containers">
 
 
                 {posts.posts?.map((post) => (<Card post= {post} />))}
