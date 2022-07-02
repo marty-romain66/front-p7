@@ -60,8 +60,7 @@ export default function SignIn() {
   };
 
   return (
-    <div>
-      {" "}
+    <>
       {modal === null ? (
         <ThemeProvider theme={theme}>
           <Container component="main" maxWidth="xs">
@@ -139,6 +138,6 @@ export default function SignIn() {
       ) : (
         <SignUp />
       )}
-    </div>
+  </>
   );
 }

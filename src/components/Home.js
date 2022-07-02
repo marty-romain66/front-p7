@@ -18,11 +18,11 @@ return (
     <>
         {auth !== false?
         
-        <><Header /><AddPost /><div className="containers">
+        <><Header /><AddPost /><>
 
 
                 {posts.posts?.map((post) => (<Card post= {post} />))}
-            </div></> : <SignIn />}
+            </></> : <SignIn />}
         </>
 );
 };
