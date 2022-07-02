@@ -15,7 +15,7 @@ const Home = () => {
 
     const dispatch = useDispatch();
 return (
-    <div>
+    <>
         {auth !== false?
         
         <><Header /><AddPost /><div className="containers">
@@ -23,7 +23,7 @@ return (
 
                 {posts.posts?.map((post) => (<Card post= {post} />))}
             </div></> : <SignIn />}
-    </div>
+        </>
 );
 };
 

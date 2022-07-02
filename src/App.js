@@ -83,14 +83,14 @@ function App() {
   console.log(auth.isAdmin)
 
   return (
-    <div>
+    
       <BrowserRouter>
         <Routes>
           <Route path="/profil" element={<Profil />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    
   );
 }
 
