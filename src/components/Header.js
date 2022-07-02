@@ -60,7 +60,10 @@ const ResponsiveAppBar = ( headerTrue) => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{
+        height: "150px"
+      }} >
+
         <Toolbar disableGutters>
         
          
@@ -114,7 +117,8 @@ const ResponsiveAppBar = ( headerTrue) => {
           </Box>
         
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box  sx={{ flexGrow: 0,
+          widh:"100px" }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt={auth.auth.pseudo} src={auth.auth.profilePicture} />

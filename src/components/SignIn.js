@@ -67,6 +67,7 @@ export default function SignIn() {
             <CssBaseline />
             <Box
               sx={{
+                m: "auto",
                 marginTop: 8,
                 display: "flex",
                 flexDirection: "column",

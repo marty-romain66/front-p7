@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import url("./_addPost.scss");
 @import url("./_card.scss");
+.MuiAvatar-root {
+  width: 80px !important;
+  height: 80px !important;
+}
 .cardProfile{
   display: flex;
   flex-direction: column;
