@@ -63,7 +63,7 @@ export default function SignIn() {
     <>
       {modal === null ? (
         <ThemeProvider theme={theme}>
-          <Container component="main" maxWidth="xl">
+          <Container component="main" maxWidth="sm" >
             <CssBaseline />
             <Box
               sx={{
@@ -71,6 +71,9 @@ export default function SignIn() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+                height: "100%",
               }}
             >
               <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -83,7 +86,8 @@ export default function SignIn() {
                 component="form"
                 onSubmit={handleLogin}
                 noValidate
-                sx={{ mt: 1 }}
+                sx={{ mt: 1,
+                }}
               >
                 <TextField
                   onChange={onChangeEmail}
