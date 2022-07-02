@@ -63,7 +63,7 @@ export default function SignIn() {
     <>
       {modal === null ? (
         <ThemeProvider theme={theme}>
-          <Container component="main" maxWidth="xs">
+          <Container component="main" maxWidth="xl">
             <CssBaseline />
             <Box
               sx={{
