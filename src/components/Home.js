@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { getPosts } from "../feature/post.slice";
 import AddPost from './AddPost';
 import SignIn from './SignIn';
-
+import Container from '@mui/material/Container';
 const Home = () => {
   const posts = useSelector(state => state.posts);
   const auth = useSelector(state => state.auth.auth);
@@ -15,7 +15,7 @@ const Home = () => {
 
     const dispatch = useDispatch();
 return (
-    <>
+    <Container maxWidth="xl">
         {auth !== false?
         
         <><Header /><AddPost /><>
@@ -23,7 +23,7 @@ return (
 
                 {posts.posts?.map((post) => (<Card post= {post} />))}
             </></> : <SignIn />}
-        </>
+    </Container>
 );
 };
 
