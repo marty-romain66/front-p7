@@ -9,7 +9,7 @@ import {
   } from 'react-router-dom';
   import Header from "../components/Header"
 import CardProfil from '../components/CardProfil';
-  
+import Container from '@mui/material/Container';
 
 const Profil = () => {
  
@@ -18,12 +18,17 @@ const headerTrue = true
     const auth = useSelector(state => state.auth);
  
     return (
-        <div>
+        <Container maxWidth="sm" sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px"
+        }}>
+
             {auth ==false  &&   <Navigate replace to="/" />}
             <Header  headerTrue={ headerTrue} />
          <CardProfil/>
             
-        </div>
+        </Container>
     );
 };
 

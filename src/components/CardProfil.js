@@ -91,8 +91,14 @@ const CardProfil = () => {
   };
 
   return (
-    <div className="cardProfile">
-      <div className="User">
+    <div className="cardProfile" >
+      <div className="User" style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+
+      }} >
         <h1>Bienvenue {auth.auth.name}</h1>
         {auth.auth.profilePicture!==null?(
         <img className="imageProfile" src={auth.auth.profilePicture} alt="" /> ):null}

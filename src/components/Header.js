@@ -59,9 +59,10 @@ const ResponsiveAppBar = ( headerTrue) => {
 
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{
+      borderRadius: "10px",
+    }}>
       <Container maxWidth="xl" sx={{
-        height: "150px"
       }} >
 
         <Toolbar disableGutters>

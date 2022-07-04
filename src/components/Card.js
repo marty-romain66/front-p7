@@ -28,6 +28,11 @@ if(auth.isAdmin === true || auth.admin === true){
 }
 
 
+console.log(d)
+
+
+
+
   const deleteCard = (e) => {
     e.preventDefault();
 

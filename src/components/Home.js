@@ -15,7 +15,8 @@ const Home = () => {
 
     const dispatch = useDispatch();
 return (
-    <Container maxWidth="xl">
+    <Container maxWidth="sm">
+
         {auth !== false?
         
         <><Header /><AddPost /><>
