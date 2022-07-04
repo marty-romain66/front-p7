@@ -28,7 +28,8 @@ if(auth.isAdmin === true || auth.admin === true){
 }
 
 
-console.log(d)
+
+
 
 
 
