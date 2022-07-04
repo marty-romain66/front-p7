@@ -13,7 +13,7 @@ const Comments = ({post}) => {
         <div>
             {/* {comment?.map((comment) => <p> {comment.content} </p>)} */}
             {comments &&
-        comments.map((comment) => ( <div className='user'  > <img  src={comment.User.profilePicture} alt="" /> <span> {auth.name} :    </span>
+        comments.map((comment) => ( <div className='user'  > <img  src={comment.User.profilePicture} alt="" /> <span> {comment.User.name} :    </span>
            {comment.content}  {comment.userId === auth.userId || auth.isAdmin==true?(< DeleteComment post={post} comment={comment} />) :null} </div>))}
         </div>
     );

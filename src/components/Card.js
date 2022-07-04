@@ -14,6 +14,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import ModifyPost from "./post/ModifyPost";
 const Card = ({ post }) => {
   const [modal, setModal] = React.useState(false);
+  const [modalImage, setModalImage] = React.useState(false);
   const [modalComment, setModalComment] = React.useState(false);
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
@@ -22,24 +23,21 @@ const Card = ({ post }) => {
     (state) => state.modalCommantaireChange.modalCommantaireChange
   );
 
-let adminUrl = ""
-if(auth.isAdmin === true || auth.admin === true){
-  adminUrl = "admin/"
-}
-
-
-
-
-
-
-
+  let adminUrl = "";
+  if (auth.isAdmin === true || auth.admin === true) {
+    adminUrl = "admin/";
+  }
 
   const deleteCard = (e) => {
     e.preventDefault();
 
-    if (auth.userId === post.userId || auth.isAdmin === true|| auth.admin === true) {
+    if (
+      auth.userId === post.userId ||
+      auth.isAdmin === true ||
+      auth.admin === true
+    ) {
       axios
-        .delete(`http://82.223.139.193:3001/api/posts/${adminUrl}${post.id}` , {
+        .delete(`http://82.223.139.193:3001/api/posts/${adminUrl}${post.id}`, {
           data: {
             userId: auth.userId,
           },
@@ -54,7 +52,6 @@ if(auth.isAdmin === true || auth.admin === true){
   };
 
   const modalCommantaire = (e) => {
-    
     if (modalComment === false) {
       setModalComment(true);
     } else {
@@ -63,11 +60,27 @@ if(auth.isAdmin === true || auth.admin === true){
   };
   const image = () => {
     if (post.imageUrl) {
-      return <img src={post.imageUrl} alt="post" />;
+      return <  img  style={{
+        height: modalImage ? "100%" : "400px",
+        cursor: "pointer",
+      }}  onClick={modalImages} src={post.imageUrl} alt="post" />;
     } else {
       return null;
     }
   };
+  const modalImages = (e) => {
+    e.preventDefault();
+if (modalImage === false) {
+  setModalImage(true);
+
+  console.log("modalImage", modalImage);
+}
+else {
+  setModalImage(false);
+}
+console.log("modalImage", modalImage);
+
+  }
 
   axios({
     method: "get",
@@ -85,9 +98,9 @@ if(auth.isAdmin === true || auth.admin === true){
     });
 
   return (
-    <div className="cards postion-relative">
+    <div className="cards postion-relative" >
       {auth.userId === post.userId || auth.isAdmin === true ? (
-        <div className="card__action">
+        <div className="card__action ">
           <CloseIcon onClick={deleteCard} className="close" />
           <EditIcon
             onClick={() => setModal(!modal)}
@@ -97,33 +110,30 @@ if(auth.isAdmin === true || auth.admin === true){
       ) : null}
 
       {modal ? <ModifyPost post={post} modal={modal} /> : null}
-      <div className="card-header">
-        {post.imageStore ? <img src={post.imageStore} alt="" /> : image()}
+      <div className="card-header" >
+        {post.imageStore ? <div > 
+          <img style={{cursor : "pointer"}} onClick={modalImages} src={post.imageStore} alt="" /> </div> : image()}
       </div>
-      <div className="card-body">
+      <div className="card-body" style={{display : modalImage.display}}>
         <h4>{post.title}</h4>
         <p>{post.content}</p>
         <div className="user">
-          <img
-            src={post.User.profilePicture}
-            alt="user"
-          />
+          <img src={post.User.profilePicture} alt="user" />
           <div className="user-info">
             <h5> posté par : {post.User.name} </h5>
           </div>
         </div>
 
-        
-          <div className="btnCommantaire">
-            <AddCommentIcon
-              style={{ cursor: "pointer" }}
-              onClick={modalCommantaire}
-            >
-              Ajouter un commantaire
-            </AddCommentIcon>
-          </div>
-        
-        {modalComment ?  <AddComm post={post} modal={modalComment}  /> : null}
+        <div className="btnCommantaire"> 
+          <AddCommentIcon
+            style={{ cursor: "pointer" }}
+            onClick={modalCommantaire}
+            
+          >
+          </AddCommentIcon>
+        </div>
+
+        {modalComment ? <AddComm post={post} modal={modalComment} /> : null}
       </div>
       <Comments post={post} />
     </div>
