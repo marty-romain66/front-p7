@@ -60,27 +60,32 @@ const Card = ({ post }) => {
   };
   const image = () => {
     if (post.imageUrl) {
-      return <  img  style={{
-        height: modalImage ? "100%" : "400px",
-        cursor: "pointer",
-      }}  onClick={modalImages} src={post.imageUrl} alt="post" />;
+      return (
+        <img
+          style={{
+            height: modalImage ? "100%" : "400px",
+            cursor: "pointer",
+          }}
+          onClick={modalImages}
+          src={post.imageUrl}
+          alt="post"
+        />
+      );
     } else {
       return null;
     }
   };
   const modalImages = (e) => {
     e.preventDefault();
-if (modalImage === false) {
-  setModalImage(true);
+    if (modalImage === false) {
+      setModalImage(true);
 
-  console.log("modalImage", modalImage);
-}
-else {
-  setModalImage(false);
-}
-console.log("modalImage", modalImage);
-
-  }
+      console.log("modalImage", modalImage);
+    } else {
+      setModalImage(false);
+    }
+    console.log("modalImage", modalImage);
+  };
 
   axios({
     method: "get",
@@ -98,7 +103,7 @@ console.log("modalImage", modalImage);
     });
 
   return (
-    <div className="cards postion-relative" >
+    <div className="cards postion-relative">
       {auth.userId === post.userId || auth.isAdmin === true ? (
         <div className="card__action ">
           <CloseIcon onClick={deleteCard} className="close" />
@@ -110,11 +115,21 @@ console.log("modalImage", modalImage);
       ) : null}
 
       {modal ? <ModifyPost post={post} modal={modal} /> : null}
-      <div className="card-header" >
-        {post.imageStore ? <div > 
-          <img style={{cursor : "pointer"}} onClick={modalImages} src={post.imageStore} alt="" /> </div> : image()}
+      <div className="card-header">
+        {post.imageStore ? (
+          <div>
+            <img
+              style={{ cursor: "pointer" }}
+              onClick={modalImages}
+              src={post.imageStore}
+              alt=""
+            />{" "}
+          </div>
+        ) : (
+          image()
+        )}
       </div>
-      <div className="card-body" style={{display : modalImage.display}}>
+      <div className="card-body" style={{ display: modalImage.display }}>
         <h4>{post.title}</h4>
         <p>{post.content}</p>
         <div className="user">
@@ -124,13 +139,12 @@ console.log("modalImage", modalImage);
           </div>
         </div>
 
-        <div className="btnCommantaire"> 
+        <div className="btnCommantaire"  style={{ cursor: "pointer", display : 'flex'}}
+            onClick={modalCommantaire}>
           <AddCommentIcon
-            style={{ cursor: "pointer" }}
-            onClick={modalCommantaire}
-            
-          >
-          </AddCommentIcon>
+           
+          ></AddCommentIcon>
+          Ajouter un commantaire
         </div>
 
         {modalComment ? <AddComm post={post} modal={modalComment} /> : null}

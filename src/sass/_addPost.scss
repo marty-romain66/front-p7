@@ -4,14 +4,14 @@
     
     
     form{
+        margin-top: 15px;
+        width: 100%;
         position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 300px;
-        margin: 10px;
-        padding: 10px;
+        padding: 50px;
         border-radius: 10px;
         background-color: #1976d2;
         box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);

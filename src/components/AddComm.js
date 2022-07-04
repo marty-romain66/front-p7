@@ -1,8 +1,16 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { getPosts, addComment ,updatePosts,updateComment } from "../feature/post.slice";
-const AddComm = ({ post ,modal}) => {
+import {
+  getPosts,
+  addComment,
+  updatePosts,
+  updateComment,
+} from "../feature/post.slice";
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import { IconButton, Input } from '@mui/material';
+const AddComm = ({ post, modal }) => {
   const auth = useSelector((state) => state.auth.auth);
   const dispatch = useDispatch();
 
@@ -16,19 +24,20 @@ const AddComm = ({ post ,modal}) => {
 
   const handlePost = (e) => {
     e.preventDefault();
-    let data = []
+    let data = [];
     if (post.comments === null) {
-        data = [{ comment, userId: auth.userId }];
+      data = [{ comment, userId: auth.userId }];
+    } else {
+      data = [
+        ...post.Comments,
+        { content: comment, userId: auth.userId, User: { name: auth.name } },
+      ];
     }
-    else {
-        data = [...post.Comments, { content : comment, userId: auth.userId, User : {name : auth.name}}];
-    }
-
 
     console.log(data);
     axios
       .post(`http://82.223.139.193:3001/api/posts/${post.id}/comments`, {
-        content : comment,
+        content: comment,
         userId: auth.userId,
       })
       .then((res) => {
@@ -44,7 +53,7 @@ const AddComm = ({ post ,modal}) => {
           },
         }).then((res) => {
           console.log(res.data);
-          dispatch(addComment( [post.id, res.data]));
+          dispatch(addComment([post.id, res.data]));
           // dispatch(getPosts(res.data));
         });
       })
@@ -54,14 +63,17 @@ const AddComm = ({ post ,modal}) => {
   };
   return (
     <div>
-    {modalComment ?(
-      <><span>Ajouter un commantaire</span><form onSubmit={handlePost} action="">
-          <input onChange={handleComment} type="text" value={comment} />
-          <input type="submit" value="Envoyer" />
-        </form></>
-    ) : null}
+      {modalComment ? (
+        <>
+          <label htmlFor="contained-button-file" onSubmit={handlePost}>
+          
+            <Input onChange={handleComment} type="text" value={comment} />
+            <Button variant="contained" component="span" onClick={handlePost} > Envoyer </Button>
+         
+          </label>
+        </>
+      ) : null}
     </div>
-    
   );
 };
 

@@ -10,12 +10,15 @@ const Comments = ({post}) => {
     
 
     return (
-        <div>
-            {/* {comment?.map((comment) => <p> {comment.content} </p>)} */}
+        <>
+         
             {comments &&
-        comments.map((comment) => ( <div className='user'  > <img  src={comment.User.profilePicture} alt="" /> <span> {comment.User.name} :    </span>
-           {comment.content}  {comment.userId === auth.userId || auth.isAdmin==true?(< DeleteComment post={post} comment={comment} />) :null} </div>))}
-        </div>
+        comments.map((comment) => ( <div className='user' style={{
+            padding: "25px",
+            
+          }} > <img  src={comment.User.profilePicture} alt="" /> <div className='user-info'> <h5> {comment.User.name} :  
+           {comment.content}</h5>  </div> {comment.userId === auth.userId || auth.isAdmin==true?(< DeleteComment post={post} comment={comment} />)  :null} </div>))}
+        </>
     );
 };
 

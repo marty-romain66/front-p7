@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import url("./_addPost.scss");
 @import url("./_card.scss");
+
+.btnCommantaire{
+  margin-top: 25px;
+}
+
 .MuiAvatar-root {
   width: 80px !important;
   height: 80px !important;
@@ -103,6 +108,7 @@ body {
 .user {
   display: flex;
   margin-top: auto;
+  align-items: center;
   
 }
 

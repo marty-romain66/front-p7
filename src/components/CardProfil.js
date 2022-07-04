@@ -121,33 +121,7 @@ const CardProfil = () => {
       <p onClick={deleteCompte} style={{cursor : "pointer"}}>Supprimer mon Compte</p>
           </div>
       <div>
-        {/* {auth.auth.isAdmin ? null : (
-        <li onClick={deleteCompte} className="deleteCompte">
-          Je souhaite supprimer mon compte
-        </li>
-      )}
-      {auth.auth.isAdmin === true ? (
-        <li>je suis admin</li>
-      ) : (
-        <li>je suis pas admin</li>
-      )} */}
-        {/* {auth.auth.isAdmin === true ? (
-        <div>
-          {admin.admin.map((user) => (
-            <li style={{ cursor: "pointer" }} onClick={() => deleteUser(user)}>
-              Je souhaite suprimmer l'utilsateur : {user.name}
-            </li>
-          ))}
-
-          <div>
-            <p>Ajouter une photo de profil</p>
-            <form enctype='multipart/form-data'action='/upload_files' method="post" onSubmit={updateUser} >
-              <input onChange={handleImage} type="file" />
-              <button type="submit">Ajouter une photo de profil</button>
-            </form>
-          </div>
-        </div>
-      ) : null} */}
+       
       </div>
     </div>
   );
