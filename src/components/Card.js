@@ -109,7 +109,7 @@ const Card = ({ post }) => {
           <CloseIcon onClick={deleteCard} className="close" />
           <EditIcon
             onClick={() => setModal(!modal)}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", color:"red" }}
           />
         </div>
       ) : null}

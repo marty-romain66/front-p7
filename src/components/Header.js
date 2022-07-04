@@ -65,31 +65,16 @@ const ResponsiveAppBar = ( headerTrue) => {
       <Container maxWidth="xl" sx={{
       }} >
 
-        <Toolbar disableGutters>
+        <Toolbar disableGutters sx={{justifyContent: "space-between"}}>
         
          
 
     
           <PostAddIcon style={{cursor : "pointer"}}    onClick={handleCloseNavMenu}  sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-           <Box className='flex-center' sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+         
+           <Box className='flex-center' sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' },  }}>
            
-           <Button
+           <Button sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
             
              onClick={handleCloseNavMenu} 
             
@@ -99,7 +84,7 @@ const ResponsiveAppBar = ( headerTrue) => {
            </Button>
         
        </Box>
-          </Typography>
+          
            <Link to={"/"} > <img className='logo' src="./icon2.svg"/></Link>
     
           <Box className='flex-center' sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -141,11 +126,11 @@ const ResponsiveAppBar = ( headerTrue) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-             
+             <Link style={{ textDecoration:"none", color:"black" }} to={{
+    pathname: "/profil"}}>
                 <MenuItem  onClick={handleCloseUserMenu}>
-          <Link to={{
-    pathname: "/profil"}}>   <Typography textAlign="center">Profil </Typography></Link>
-                </MenuItem>
+             <Typography textAlign="center">Profil </Typography>
+                </MenuItem></Link>
                 <MenuItem  onClick={handleCloseUserMenu}>
                   <Typography onClick={logout} textAlign="center">Déconnexion</Typography>
                 </MenuItem>

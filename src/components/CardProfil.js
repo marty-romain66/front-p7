@@ -89,6 +89,15 @@ const CardProfil = () => {
         console.log(err);
       });
   };
+  const chooseImage = () => {
+    if (image)
+    return (
+      image
+    )
+    else return (
+      auth.auth.profilePicture
+    )
+  }
 
   return (
     <div className="cardProfile" >
@@ -100,8 +109,8 @@ const CardProfil = () => {
 
       }} >
         <h1>Bienvenue {auth.auth.name}</h1>
-        {auth.auth.profilePicture!==null?(
-        <img className="imageProfile" src={auth.auth.profilePicture} alt="" /> ):null}
+        {auth.auth.profilePicture!==null?( 
+        <img className="imageProfile" src={chooseImage()} alt="" /> ):null}
       </div>
       <div>
         {auth.auth.profilePicture===null?(
