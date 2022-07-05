@@ -5,14 +5,14 @@ import { deleteUser } from "../feature/admin.slice";
 import { getUser } from "../feature/admin.slice";
 import { modifyUser } from "../feature/auth.slice";
 import { auths } from "../feature/auth.slice";
-import { IconButton, Input } from '@mui/material';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
+import { IconButton, Input } from "@mui/material";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
 
 const CardProfil = () => {
-  const Input = styled('input')({
-    display: 'none',
+  const Input = styled("input")({
+    display: "none",
   });
   const [userList, setUserList] = useState([]);
   const [imageBack, setImageBack] = useState("");
@@ -22,16 +22,18 @@ const CardProfil = () => {
   const admin = useSelector((state) => state.admin);
 
   const deleteCompte = () => {
-    if(auth.auth.isAdmin===true){
-      return alert("Vous n'avez pas le droit de supprimer un compte admin"); 
+    if (auth.auth.isAdmin === true) {
+      return alert("Vous n'avez pas le droit de supprimer un compte admin");
     }
     axios
-      .delete("http://82.223.139.193:3001/api/auth/user/" + auth.auth.userId, {})
+      .delete(
+        "http://82.223.139.193:3001/api/auth/user/" + auth.auth.userId,
+        {}
+      )
       .then((res) => {
         console.log(res);
         dispatch(auths(false));
-        document.location.href="/"
-      
+        document.location.href = "/";
       })
       .catch((err) => {
         console.log(err);
@@ -40,7 +42,6 @@ const CardProfil = () => {
   };
 
   const deleteUser = (user) => {
- 
     axios({
       method: "put",
       url: "http://82.223.139.193:3001/api/auth/admin/users/" + user.id,
@@ -90,49 +91,93 @@ const CardProfil = () => {
       });
   };
   const chooseImage = () => {
-    if (image)
-    return (
-      image
-    )
-    else return (
-      auth.auth.profilePicture
-    )
-  }
+    if (image) return image;
+    else return auth.auth.profilePicture;
+  };
 
   return (
-    <div className="cardProfile" >
-      <div className="User" style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-
-      }} >
-        <h1>Bienvenue {auth.auth.name}</h1>
-        {auth.auth.profilePicture!==null?( 
-        <img className="imageProfile" src={chooseImage()} alt="" /> ):null}
+    <>
+      <div className="cardProfile">
+        <div
+          className="User"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <h1>Bienvenue {auth.auth.name}</h1>
+          {auth.auth.profilePicture !== null ? (
+            <img className="imageProfile" src={chooseImage()} alt="" />
+          ) : null}
+        </div>
+        <div>
+          {auth.auth.profilePicture === null ? (
+            <p>Ajouter une photo de profile : </p>
+          ) : (
+            <p>Modifier sa photo de profile</p>
+          )}
+          <label htmlFor="icon-button-file">
+            <Input
+              onChange={handleImage}
+              accept="image/*"
+              id="icon-button-file"
+              type="file"
+            />
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+            >
+              <PhotoCamera />
+            </IconButton>
+          </label>
+          <label htmlFor="contained-button-file">
+            <Input
+              accept="image/*"
+              id="contained-button-file"
+              multiple
+              type="file"
+            />
+            <Button onClick={updateUser} variant="contained" component="span">
+              Télécharger
+            </Button>
+          </label>
+          <p onClick={deleteCompte} style={{ cursor: "pointer" }}>
+            Supprimer mon Compte
+          </p>
+        </div>
+        <div></div>
       </div>
-      <div>
-        {auth.auth.profilePicture===null?(
-            <p>Ajouter une photo de profile : </p> ) :  <p>Modifier sa photo de profile</p>}
-            <label htmlFor="icon-button-file">
-  <Input onChange={handleImage} accept="image/*" id="icon-button-file" type="file" />
-  <IconButton  color="primary" aria-label="upload picture" component="span">
-    <PhotoCamera />
-  </IconButton>
-</label>
-<label htmlFor="contained-button-file">
-        <Input accept="image/*" id="contained-button-file" multiple type="file" />
-        <Button onClick={updateUser} variant="contained" component="span">
-          Télécharger
-        </Button>
-      </label>
-      <p onClick={deleteCompte} style={{cursor : "pointer"}}>Supprimer mon Compte</p>
+      {auth.auth.isAdmin === true ? (
+        <div className="cardProfile">
+          <div
+            className="User"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          ></div>
+          <h1>Vous êtes administrateur</h1>
+          <div>
+            <p>Liste des utilisateurs :</p>
+            <ul>
+              {admin.admin.map((user) => (
+                <li key={user.id}>
+                  {user.name}
+                  <Button onClick={() => deleteUser(user)}>
+                    Promouvoir administrateur
+                  </Button>
+                </li>
+              ))}
+            </ul>
           </div>
-      <div>
-       
-      </div>
-    </div>
+        </div>
+      ) : null}
+    </>
   );
 };
 
