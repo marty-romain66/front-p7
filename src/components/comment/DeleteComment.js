@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteComment } from "../feature/post.slice";
+import { deleteComment } from "../../feature/post.slice";
 const DeleteComment = ({ comment, post }) => {
   const auth = useSelector((state) => state.auth.auth);
   let adminUrl = "";

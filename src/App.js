@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import Test from "./components/Test";
-import SignIn from "./components/SignIn";
-import Header from "./components/Header";
+
 import { UserContext } from "./context/UserContext";
 import Home from "./components/Home";
-import AddPost from "./components/AddPost";
+import AddPost from "./components/post/AddPost";
 import "./sass/index.scss";
 import { PostContext } from "./context/PostContext";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +18,6 @@ function App() {
   const posts = useSelector((state) => state.posts.data);
   const auth = useSelector((state) => state.auth.auth);
   const user = JSON.parse(localStorage.getItem("user"));
-  
 
   const authHeader = () => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -50,7 +47,6 @@ function App() {
     };
     fetchData();
   }, []);
- 
 
   if (auth.token) {
     axios({
@@ -65,32 +61,27 @@ function App() {
         console.log(err);
       });
   }
-  if(auth.isAdmin === true){
+  if (auth.isAdmin === true) {
     axios({
       method: "get",
-      url: "http://localhost:3001/api/auth/admin/users/"+ auth.userId,
+      url: "http://localhost:3001/api/auth/admin/users/" + auth.userId,
       headers: authHeader(),
     })
-
       .then((res) => {
         dispatch(getUser(res.data));
-      }
-      ).catch((err) => {
+      })
+      .catch((err) => {
         console.log(err);
-      }
-      )
+      });
   }
-  console.log(auth.isAdmin)
 
   return (
-    
-      <BrowserRouter>
-        <Routes>
-          <Route path="/profil" element={<Profil />} />
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
-    
+    <BrowserRouter>
+      <Routes>
+        <Route path="/profil" element={<Profil />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

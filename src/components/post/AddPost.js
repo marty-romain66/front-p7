@@ -1,11 +1,11 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { addPosts } from "../feature/post.slice";
-import { getPosts } from "../feature/post.slice";
+import { addPosts } from "../../feature/post.slice";
+import { getPosts } from "../../feature/post.slice";
 import { useDispatch, useSelector } from "react-redux";
-import { modalChange } from "../feature/modal.slice";
-import { IconButton, Input } from "@mui/material";
+import { modalChange } from "../../feature/modal.slice";
+import { IconButton } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { styled } from "@mui/material/styles";
 const AddPost = () => {
@@ -35,7 +35,7 @@ const AddPost = () => {
 
   const handlePost = (e) => {
     e.preventDefault();
-    
+
     console.log(image);
     const datas = {
       title,
@@ -48,7 +48,7 @@ const AddPost = () => {
         name: auth.name,
       },
     };
-   
+
     try {
       axios({
         method: "post",
@@ -79,7 +79,6 @@ const AddPost = () => {
     } catch (err) {
       console.log(err);
     }
-    
   };
 
   const deletePreview = (e) => {

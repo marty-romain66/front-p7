@@ -6,7 +6,7 @@ import {
   addComment,
   updatePosts,
   updateComment,
-} from "../feature/post.slice";
+} from "../../feature/post.slice";
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { IconButton, Input } from '@mui/material';

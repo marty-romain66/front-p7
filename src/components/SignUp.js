@@ -27,6 +27,7 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const auth = useSelector((state) => state.auth.auth);
   const dispatch = useDispatch();
   const handleImage = (e) => {
@@ -52,6 +53,7 @@ export default function SignUp() {
         dispatch(auths(res.data));
       })
       .catch((err) => {
+        setErrorMsg(err.response.data.message);
         console.log(err);
       });
   };
@@ -125,15 +127,8 @@ export default function SignUp() {
 
                 />
               </Grid>
-              <Grid item xs={12}>
-                {msg !== "" ? (
-                  <p
-                    onClick={() => dispatch(logModalChange(null))}
-                    style={{ color: "rgb(49, 222, 11)", cursor: "pointer" }}
-                  >
-                    {msg} cliquez ici pour vous connecter{" "}
-                  </p>
-                ) : null}
+              <Grid item xs={12}  >
+              {errorMsg && <p style={{color : "red"}}>{errorMsg}</p>}
               </Grid>
             </Grid>
             <Button

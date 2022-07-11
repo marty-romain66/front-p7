@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -22,6 +20,7 @@ const theme = createTheme();
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.logModal.logModal);
@@ -37,10 +36,15 @@ export default function SignIn() {
       .then((response) => {
         if (response.data.token) {
           localStorage.setItem("user", JSON.stringify(response.data));
+
           dispatch(auths(response.data));
         }
 
         return response.data;
+      })
+      .catch((error) => {
+        setErrorMsg(error.response.data.error);
+        console.log(error.response.data.error);
       });
   };
 
@@ -63,7 +67,7 @@ export default function SignIn() {
     <>
       {modal === null ? (
         <ThemeProvider theme={theme}>
-          <Container component="main" maxWidth="sm" >
+          <Container component="main" maxWidth="sm">
             <CssBaseline />
             <Box
               sx={{
@@ -87,8 +91,7 @@ export default function SignIn() {
                 component="form"
                 onSubmit={handleLogin}
                 noValidate
-                sx={{ mt: 1,
-                }}
+                sx={{ mt: 1 }}
               >
                 <TextField
                   onChange={onChangeEmail}
@@ -113,10 +116,13 @@ export default function SignIn() {
                   id="password"
                   autoComplete="current-password"
                 />
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
-                />
+
+                {errorMsg && (
+                  <Typography color="red" component="h1" variant="h5">
+                    {errorMsg}
+                  </Typography>
+                )}
+
                 <Button
                   type="submit"
                   fullWidth
@@ -143,6 +149,6 @@ export default function SignIn() {
       ) : (
         <SignUp />
       )}
-  </>
+    </>
   );
 }

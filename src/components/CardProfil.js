@@ -1,11 +1,10 @@
 import axios from "axios";
-import React, { useRef, useState, useParams, useEffect } from "react";
+import React, { useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser } from "../feature/admin.slice";
-import { getUser } from "../feature/admin.slice";
 import { modifyUser } from "../feature/auth.slice";
 import { auths } from "../feature/auth.slice";
-import { IconButton, Input } from "@mui/material";
+import { IconButton} from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
@@ -14,7 +13,6 @@ const CardProfil = () => {
   const Input = styled("input")({
     display: "none",
   });
-  const [userList, setUserList] = useState([]);
   const [imageBack, setImageBack] = useState("");
   const [image, setImage] = useState("");
   const [userDelete, setUserDelete] = useState("");
@@ -27,14 +25,10 @@ const CardProfil = () => {
       return alert("Vous n'avez pas le droit de supprimer un compte admin");
     }
     axios
-      .delete(
-        "http://localhost:3001/api/auth/user/" + userDelete,
-        {}
-      )
+      .delete("http://localhost:3001/api/auth/user/" + userDelete, {})
       .then((res) => {
         console.log(res);
         dispatch(auths(false));
-        
       })
       .catch((err) => {
         console.log(err);
@@ -52,7 +46,6 @@ const CardProfil = () => {
       },
       headers: {
         authorization: `bearer ${auth.auth.token}`,
-        
       },
     })
       .then((res) => {
@@ -80,7 +73,6 @@ const CardProfil = () => {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${auth.auth.token}`,
       },
-    
     })
       .then((res) => {
         console.log(res.data);
@@ -103,7 +95,6 @@ const CardProfil = () => {
   }
 
   const deleteUserByAdmin = (user) => {
-    
     if (auth.auth.isAdmin === true) {
       alert("Vous etes sur le point de supprimer un compte utilisateur");
       axios({
@@ -115,17 +106,13 @@ const CardProfil = () => {
       })
         .then((res) => {
           console.log(res);
-          
-        }
-        )
+        })
         .catch((err) => {
           console.log(err);
-        }
-        );
-        dispatch(deleteUser(user.id));
-
+        });
+      dispatch(deleteUser(user.id));
     }
-  }
+  };
   return (
     <>
       <div className="cardProfile">
@@ -175,7 +162,10 @@ const CardProfil = () => {
               Télécharger
             </Button>
           </label>
-          <p onClick={() => setUserDelete(auth.auth.userId)} style={{ cursor: "pointer" }}>
+          <p
+            onClick={() => setUserDelete(auth.auth.userId)}
+            style={{ cursor: "pointer" }}
+          >
             Supprimer mon Compte
           </p>
         </div>
@@ -202,7 +192,7 @@ const CardProfil = () => {
                   <Button onClick={() => updateUserByAdmin(user)}>
                     Promouvoir administrateur
                   </Button>
-                  <Button onClick={ () => deleteUserByAdmin(user) }>
+                  <Button onClick={() => deleteUserByAdmin(user)}>
                     Supprimer
                   </Button>
                 </li>
