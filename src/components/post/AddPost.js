@@ -104,12 +104,12 @@ const AddPost = () => {
         <label htmlFor="icon-button-file">
           {image ? (
             <div>
-              {" "}
+              
               <img
                 style={{ height: "300px", width: "300px", objectFit: "cover" }}
                 src={image}
                 alt="image"
-              />{" "}
+              />
               <CloseIcon className="close" onClick={deletePreview} />{" "}
             </div>
           ) : null}
@@ -139,7 +139,6 @@ const AddPost = () => {
           Envoyer
         </button>
       </form>
-      {/* <div> {image !==''? (<img src={image} alt="" />) : ""}</div> */}
     </div>
   );
 };

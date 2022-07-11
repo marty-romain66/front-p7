@@ -74,9 +74,9 @@ const ResponsiveAppBar = ( headerTrue) => {
          
            <Box className='flex-center' sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' },  }}>
            
-           <Button sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
+           <Button   onClick={handleCloseNavMenu} sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
             
-             onClick={handleCloseNavMenu} 
+            
             
            
             {url === 'http://82.223.139.193:3001/profil'? "" : 'Home'}

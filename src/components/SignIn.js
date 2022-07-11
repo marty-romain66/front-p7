@@ -118,7 +118,7 @@ export default function SignIn() {
                 />
 
                 {errorMsg && (
-                  <Typography color="red" component="h1" variant="h5">
+                  <Typography color="red" component="h3" variant="h6">
                     {errorMsg}
                   </Typography>
                 )}

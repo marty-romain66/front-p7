@@ -17,7 +17,7 @@ const Home = () => {
           <AddPost />
           <>
             {posts.posts?.map((post) => (
-              <Card post={post} />
+              <Card key={post.title} post={post} />
             ))}
           </>
         </>

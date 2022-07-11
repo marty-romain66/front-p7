@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -15,7 +13,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { logModalChange } from "../feature/loginModal.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { auths } from "../feature/auth.slice";
-
+import { IconButton } from "@mui/material";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import axios from "axios";
 
 const theme = createTheme();
