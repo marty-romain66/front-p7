@@ -16,7 +16,7 @@ const DeleteComment = ({ comment, post }) => {
     axios
 
       .delete(
-        `http://82.223.139.193:3001/api/posts/${adminUrl}${post.id}/comments/${comment.id}/`,
+        `http://localhost:3001/api/posts/${adminUrl}${post.id}/comments/${comment.id}/`,
         {
           data: {
             userId: comment.userId,

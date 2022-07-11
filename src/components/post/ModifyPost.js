@@ -23,7 +23,7 @@ const ModifyPost = ({ post, modal }) => {
     setModals(false);
     axios({
       method: "put",
-      url: `http://82.223.139.193:3001/api/posts/${post.id}`,
+      url: `http://localhost:3001/api/posts/${post.id}`,
       data: {
         title,
         content,
@@ -41,7 +41,7 @@ const ModifyPost = ({ post, modal }) => {
 
         axios({
           method: "get",
-          url: "http://82.223.139.193:3001/api/posts/" + post.id,
+          url: "http://localhost:3001/api/posts/" + post.id,
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${auth.token}`,

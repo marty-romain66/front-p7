@@ -37,7 +37,7 @@ const Card = ({ post }) => {
       auth.admin === true
     ) {
       axios
-        .delete(`http://82.223.139.193:3001/api/posts/${adminUrl}${post.id}`, {
+        .delete(`http://localhost:3001/api/posts/${adminUrl}${post.id}`, {
           data: {
             userId: auth.userId,
           },
@@ -89,7 +89,7 @@ const Card = ({ post }) => {
 
   axios({
     method: "get",
-    url: `http://82.223.139.193:3001/api/posts/${post.id}/comments/`,
+    url: `http://localhost:3001/api/posts/${post.id}/comments/`,
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${auth.token}`,
@@ -130,14 +130,15 @@ const Card = ({ post }) => {
         )}
       </div>
       <div className="card-body" style={{ display: modalImage.display }}>
-        <h4>{post.title}</h4>
-        <p>{post.content}</p>
-        <div className="user">
+      <div className="user">
           <img src={post.User.profilePicture} alt="user" />
           <div className="user-info">
             <h5> posté par : {post.User.name} </h5>
           </div>
         </div>
+        <h4>{post.title}</h4>
+        <p>{post.content}</p>
+        
 
         <div className="btnCommantaire"  style={{ cursor: "pointer", display : 'flex'}}
             onClick={modalCommantaire}>

@@ -14,16 +14,21 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { logModalChange } from "../feature/loginModal.slice";
 import { useDispatch, useSelector } from "react-redux";
+import { auths } from "../feature/auth.slice";
+
 import axios from "axios";
 
 const theme = createTheme();
 
 export default function SignUp() {
+
   const [imageBack, setImageBack] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
+  const auth = useSelector((state) => state.auth.auth);
+  const dispatch = useDispatch();
   const handleImage = (e) => {
 
     setImageBack(e.target.files[0]);
@@ -38,18 +43,20 @@ export default function SignUp() {
       image: imageBack,
     };
     axios
-      .post("http://82.223.139.193:3001/api/auth/signup", data,
+      .post("http://localhost:3001/api/auth/signup", data,
         { headers: { "Content-Type": "multipart/form-data" } })
       .then((res) => {
         console.log(res);
         setMsg("Votre compte a été créé avec succès");
+        localStorage.setItem("user", JSON.stringify(res.data));
+        dispatch(auths(res.data));
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const dispatch = useDispatch();
+
   const modal = useSelector((state) => state.logModal.logModal);
 
   // };

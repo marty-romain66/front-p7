@@ -29,7 +29,7 @@ export default function SignIn() {
 
   const login = (email, password) => {
     return axios
-      .post("http://82.223.139.193:3001/api/auth/login", {
+      .post("http://localhost:3001/api/auth/login", {
         email,
         password,
       })

@@ -17,23 +17,24 @@ const CardProfil = () => {
   const [userList, setUserList] = useState([]);
   const [imageBack, setImageBack] = useState("");
   const [image, setImage] = useState("");
+  const [userDelete, setUserDelete] = useState("");
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const admin = useSelector((state) => state.admin);
 
-  const deleteCompte = () => {
+  const deleteCompte = (userDelete) => {
     if (auth.auth.isAdmin === true) {
       return alert("Vous n'avez pas le droit de supprimer un compte admin");
     }
     axios
       .delete(
-        "http://82.223.139.193:3001/api/auth/user/" + auth.auth.userId,
+        "http://localhost:3001/api/auth/user/" + userDelete,
         {}
       )
       .then((res) => {
         console.log(res);
         dispatch(auths(false));
-        document.location.href = "/";
+        
       })
       .catch((err) => {
         console.log(err);
@@ -41,15 +42,17 @@ const CardProfil = () => {
     dispatch(auths(false));
   };
 
-  const deleteUser = (user) => {
+  const updateUserByAdmin = (user) => {
     axios({
       method: "put",
-      url: "http://82.223.139.193:3001/api/auth/admin/users/" + user.id,
+      url: "http://localhost:3001/api/auth/admin/users/" + user.id,
       data: {
         isAdmin: true,
+        userId: `${auth.auth.userId}`,
       },
       headers: {
         authorization: `bearer ${auth.auth.token}`,
+        
       },
     })
       .then((res) => {
@@ -69,7 +72,7 @@ const CardProfil = () => {
     e.preventDefault();
     axios({
       method: "put",
-      url: `http://82.223.139.193:3001/api/auth/user/${auth.auth.userId}`,
+      url: `http://localhost:3001/api/auth/user/${auth.auth.userId}`,
       data: {
         image: imageBack,
       },
@@ -77,6 +80,7 @@ const CardProfil = () => {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${auth.auth.token}`,
       },
+    
     })
       .then((res) => {
         console.log(res.data);
@@ -94,7 +98,34 @@ const CardProfil = () => {
     if (image) return image;
     else return auth.auth.profilePicture;
   };
+  if (userDelete !== "") {
+    deleteCompte(userDelete);
+  }
 
+  const deleteUserByAdmin = (user) => {
+    
+    if (auth.auth.isAdmin === true) {
+      alert("Vous etes sur le point de supprimer un compte utilisateur");
+      axios({
+        method: "delete",
+        url: `http://localhost:3001/api/auth/admin/users/${user.id}`,
+        headers: {
+          authorization: `bearer ${auth.auth.token}`,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          
+        }
+        )
+        .catch((err) => {
+          console.log(err);
+        }
+        );
+        dispatch(deleteUser(user.id));
+
+    }
+  }
   return (
     <>
       <div className="cardProfile">
@@ -144,7 +175,7 @@ const CardProfil = () => {
               Télécharger
             </Button>
           </label>
-          <p onClick={deleteCompte} style={{ cursor: "pointer" }}>
+          <p onClick={() => setUserDelete(auth.auth.userId)} style={{ cursor: "pointer" }}>
             Supprimer mon Compte
           </p>
         </div>
@@ -168,8 +199,11 @@ const CardProfil = () => {
               {admin.admin.map((user) => (
                 <li key={user.id}>
                   {user.name}
-                  <Button onClick={() => deleteUser(user)}>
+                  <Button onClick={() => updateUserByAdmin(user)}>
                     Promouvoir administrateur
+                  </Button>
+                  <Button onClick={ () => deleteUserByAdmin(user) }>
+                    Supprimer
                   </Button>
                 </li>
               ))}

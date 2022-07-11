@@ -78,7 +78,7 @@ const ResponsiveAppBar = ( headerTrue) => {
             
              onClick={handleCloseNavMenu} 
             
-           >
+           
             {url === 'http://82.223.139.193:3001/profil'? "" : 'Home'}
             
            </Button>
