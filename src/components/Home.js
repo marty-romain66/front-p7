@@ -1,19 +1,14 @@
-import axios from "axios";
-import React, { useState, useEffect, useContext } from "react";
-import Card from "./Card";
+import React from "react";
+import Card from "./post/Card";
 import Header from "./Header";
-import { PostContext } from "../context/PostContext";
-import { useDispatch, useSelector } from "react-redux";
-import { getPosts } from "../feature/post.slice";
-import AddPost from "./AddPost";
+import { useSelector } from "react-redux";
+import AddPost from "./post/AddPost";
 import SignIn from "./SignIn";
 import Container from "@mui/material/Container";
 
 const Home = () => {
   const posts = useSelector((state) => state.posts);
   const auth = useSelector((state) => state.auth.auth);
-
-  const dispatch = useDispatch();
   return (
     <Container maxWidth="sm">
       {auth !== false ? (
@@ -21,12 +16,9 @@ const Home = () => {
           <Header />
           <AddPost />
           <>
-
             {posts.posts?.map((post) => (
               <Card post={post} />
-              
             ))}
-            
           </>
         </>
       ) : (
