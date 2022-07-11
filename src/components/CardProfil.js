@@ -25,7 +25,7 @@ const CardProfil = () => {
       return alert("Vous n'avez pas le droit de supprimer un compte admin");
     }
     axios
-      .delete("http://localhost:3001/api/auth/user/" + userDelete, {})
+      .delete("http://82.223.139.193:3001/api/auth/user/" + userDelete, {})
       .then((res) => {
         console.log(res);
         dispatch(auths(false));
@@ -39,7 +39,7 @@ const CardProfil = () => {
   const updateUserByAdmin = (user) => {
     axios({
       method: "put",
-      url: "http://localhost:3001/api/auth/admin/users/" + user.id,
+      url: "http://82.223.139.193:3001/api/auth/admin/users/" + user.id,
       data: {
         isAdmin: true,
         userId: `${auth.auth.userId}`,
@@ -65,7 +65,7 @@ const CardProfil = () => {
     e.preventDefault();
     axios({
       method: "put",
-      url: `http://localhost:3001/api/auth/user/${auth.auth.userId}`,
+      url: `http://82.223.139.193:3001/api/auth/user/${auth.auth.userId}`,
       data: {
         image: imageBack,
       },
@@ -99,7 +99,7 @@ const CardProfil = () => {
       alert("Vous etes sur le point de supprimer un compte utilisateur");
       axios({
         method: "delete",
-        url: `http://localhost:3001/api/auth/admin/users/${user.id}`,
+        url: `http://82.223.139.193:3001/api/auth/admin/users/${user.id}`,
         headers: {
           authorization: `bearer ${auth.auth.token}`,
         },

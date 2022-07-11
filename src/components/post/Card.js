@@ -38,7 +38,7 @@ const Card = ({ post }) => {
       auth.admin === true
     ) {
       axios
-        .delete(`http://localhost:3001/api/posts/${adminUrl}${post.id}`, {
+        .delete(`http://82.223.139.193:3001/api/posts/${adminUrl}${post.id}`, {
           data: {
             userId: auth.userId,
           },
@@ -91,7 +91,7 @@ const Card = ({ post }) => {
 
   axios({
     method: "get",
-    url: `http://localhost:3001/api/posts/${post.id}/comments/`,
+    url: `http://82.223.139.193:3001/api/posts/${post.id}/comments/`,
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${auth.token}`,
