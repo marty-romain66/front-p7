@@ -20,6 +20,7 @@ const Card = ({ post }) => {
   const [modalImage, setModalImage] = React.useState(false);
   const [modalComment, setModalComment] = React.useState(false);
   const [modalDelete, setModalDelete] = React.useState(false);
+  const [modalLike, setModalLike] = React.useState(false);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth.auth);
 
@@ -111,6 +112,7 @@ const Card = ({ post }) => {
         userId: auth.userId,
         like: true,
         postId: post.id,
+        userName: auth.userName,
       })
       .then((res) => {
         dispatch(addLike([post.id, data]));
@@ -158,20 +160,20 @@ const Card = ({ post }) => {
     <div className="cards postion-relative">
       {modalDelete === true ? (
         <div style={{ zIndex: "20" }}>
-          {" "}
+        
           <h3>Etes vous sur de vouloir supprimer ce post?</h3>
           <span
             style={{ cursor: "pointer", color: "red" }}
             onClick={deletePost}
           >
             Oui
-          </span>{" "}
+          </span>
           <span
             style={{ cursor: "pointer", color: "green" }}
             onClick={() => setModalDelete(!modalDelete)}
           >
             Non
-          </span>{" "}
+          </span>
         </div>
       ) : null}
       {auth.userId === post.userId || auth.isAdmin === true ? (
@@ -201,6 +203,7 @@ const Card = ({ post }) => {
       </div>
       <div className="card-body" style={{ display: modalImage.display }}>
         <div className="user">
+          
           <img src={post.User.profilePicture} alt="user" />
           <div className="user-info">
             <h5> posté par : {post.User.name} </h5>
@@ -211,9 +214,10 @@ const Card = ({ post }) => {
 
         <div>
           
-          {post.Likes ? <p style={{margin : '0'}} > Aimé par {post.Likes.length} personnes </p> : null}
+          {post.Likes ? <p onClick={ ()=>  setModalLike(!modalLike)} style={{margin : '0'}} > Aimé par {post.Likes.length} personnes </p> : null}
+          { modalLike?  <div className="like"> {post.Likes.map((likes) => <span>ok</span> )   } </div> : null}
           {found() ? (
-            <FavoriteIcon sx={{ color: pink[500] }} onClick={deleteLikes} />
+            <FavoriteIcon sx={{ color: pink[500] }} style={{ cursor: "pointer" }} onClick={deleteLikes} />
           ) : (
             <FavoriteBorderIcon
               sx={{ color: pink[500] }}
