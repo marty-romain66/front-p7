@@ -220,8 +220,8 @@ const id = open ? 'simple-popover' : undefined;
       </div>
       <div className="card-body" style={{ display: modalImage.display }}>
         <div className="user">
-          
-          <img src={post.User.profilePicture} alt="user" />
+          { post.User.profilePicture ? ( <img src={post.User.profilePicture} alt="user" />  ) : null }
+  
           <div className="user-info">
             <h5> posté par : {post.User.name} </h5>
           </div>
