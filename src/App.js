@@ -32,7 +32,7 @@ function App() {
     const fetchData = async () => {
       if (user) {
         await axios
-          .get(`http://localhost:3001/api/auth/user/${user.userId}`, {
+          .get(`http://82.223.139.193:3001/api/auth/user/${user.userId}`, {
             headers: authHeader(),
           })
 
@@ -51,7 +51,7 @@ function App() {
   if (auth.token) {
     axios({
       method: "get",
-      url: "http://localhost:3001/api/posts/",
+      url: "http://82.223.139.193:3001/api/posts/",
       headers: authHeader(),
     })
       .then((res) => {
@@ -64,7 +64,7 @@ function App() {
   if (auth.isAdmin === true) {
     axios({
       method: "get",
-      url: "http://localhost:3001/api/auth/admin/users/" + auth.userId,
+      url: "http://82.223.139.193:3001/api/auth/admin/users/" + auth.userId,
       headers: authHeader(),
     })
       .then((res) => {

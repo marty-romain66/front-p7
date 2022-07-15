@@ -43,7 +43,7 @@ export default function SignUp() {
       image: imageBack,
     };
     axios
-      .post("http://localhost:3001/api/auth/signup", data,
+      .post("http://82.223.139.193:3001/api/auth/signup", data,
         { headers: { "Content-Type": "multipart/form-data" } })
       .then((res) => {
         console.log(res);

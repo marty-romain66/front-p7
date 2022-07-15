@@ -36,7 +36,7 @@ const AddComm = ({ post, modal }) => {
 
     console.log(data);
     axios
-      .post(`http://localhost:3001/api/posts/${post.id}/comments`, {
+      .post(`http://82.223.139.193:3001/api/posts/${post.id}/comments`, {
         content: comment,
         userId: auth.userId,
       })
@@ -46,7 +46,7 @@ const AddComm = ({ post, modal }) => {
 
         axios({
           method: "get",
-          url: `http://localhost:3001/api/posts/${post.id}/comments/`,
+          url: `http://82.223.139.193:3001/api/posts/${post.id}/comments/`,
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${auth.token}`,
