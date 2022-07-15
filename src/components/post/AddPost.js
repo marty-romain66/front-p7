@@ -53,7 +53,7 @@ const AddPost = () => {
       axios({
         method: "post",
         formData: true,
-        url: "http://82.223.139.193:3001/api/posts",
+        url: "http://localhost:3001/api/posts",
         data: datas,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -64,7 +64,7 @@ const AddPost = () => {
           dispatch(addPosts(datas));
           axios({
             method: "get",
-            url: "http://82.223.139.193:3001/api/posts",
+            url: "http://localhost:3001/api/posts",
             headers: {
               "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${auth.token}`,

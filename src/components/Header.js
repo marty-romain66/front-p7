@@ -79,7 +79,7 @@ const ResponsiveAppBar = ( headerTrue) => {
             
             
            
-            {url === 'http://82.223.139.193:3001/profil'? "" : 'Home'}
+            {url === 'http://localhost:3001/profil'? "" : 'Home'}
             
            </Button>
         

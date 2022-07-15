@@ -42,7 +42,7 @@ const Card = ({ post }) => {
       auth.admin === true
     ) {
       axios
-        .delete(`http://82.223.139.193:3001/api/posts/${adminUrl}${post.id}`, {
+        .delete(`http://localhost:3001/api/posts/${adminUrl}${post.id}`, {
           data: {
             userId: auth.userId,
           },
@@ -94,7 +94,7 @@ const Card = ({ post }) => {
 
   axios({
     method: "get",
-    url: `http://82.223.139.193:3001/api/posts/${post.id}/comments/`,
+    url: `http://localhost:3001/api/posts/${post.id}/comments/`,
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${auth.token}`,
@@ -108,7 +108,7 @@ const Card = ({ post }) => {
     const data = [...post.Likes, { userId: auth.userId, like: true }];
 
     axios
-      .post(`http://82.223.139.193:3001/api/posts/${post.id}/likes`, {
+      .post(`http://localhost:3001/api/posts/${post.id}/likes`, {
         userId: auth.userId,
         like: true,
         postId: post.id,
@@ -122,18 +122,25 @@ const Card = ({ post }) => {
       });
   };
 
-  const found = () => {
-    if (post.Likes.length > 0) {
-      return post.Likes.find((like) => like.userId === auth.userId);
-    } else {
-      return false;
-    }
-  };
+  // const found = () => {
+  //   if  (post.Likes.length > 0) {
+  //     return post.Likes.find((like) => like.userId === auth.userId);
+  //   } else {
+  //     return false;
+  //   }
+  // };
+const found = () => {
+  if (post.Likes?.length > 0) {
+    return post.Likes.find((like) => like.userId === auth.userId);
+  } else {
+    return false;
+  }
+}
 
   const deleteLikes = () => {
     axios
       .delete(
-        `http://82.223.139.193:3001/api/posts/${post.id}/likes/${auth.userId}`,
+        `http://localhost:3001/api/posts/${post.id}/likes/${auth.userId}`,
         {
           data: {
             userId: auth.userId,
@@ -216,7 +223,7 @@ const Card = ({ post }) => {
           
           {post.Likes ? <p onClick={ ()=>  setModalLike(!modalLike)} style={{margin : '0'}} > Aimé par {post.Likes.length} personnes </p> : null}
           { modalLike?  <div className="like"> {post.Likes.map((likes) => <span>ok</span> )   } </div> : null}
-          {found() ? (
+          {found()? (
             <FavoriteIcon sx={{ color: pink[500] }} style={{ cursor: "pointer" }} onClick={deleteLikes} />
           ) : (
             <FavoriteBorderIcon
